@@ -8,10 +8,12 @@
 <body>
     <?php
     include 'connexion.php';
+    include 'mail.php';
    
     $code = ""; //code du statut
     $date = ""; 
     $label = ""; //libelle du statut
+
 
     $file = fopen("suivi.csv", "w");
 

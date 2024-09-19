@@ -1,12 +1,22 @@
 <?php
-    require 'connexion.php';
-    require 'index.php';
+
+    require_once 'vendor/autoload.php';
+
+    $env = Dotenv\Dotenv::createImmutable(__DIR__);
+    $env->load();
+
+    include 'connexion.php';
+    include 'index.php';
+
+    echo 1;
 
     ini_set('display_errors',1);
+    ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
     $from=$_ENV['FROM'];
     $to=$_ENV['TO'];
+
 
     $subject="Suivi de votre colis.";
 
@@ -19,9 +29,13 @@
     }
     $headers="De :".$from;
 
-    mail($to,$subject,$message,$headers);
+    if(mail($to,$subject,$message,$headers)){
+        echo "L'email a été envoyé.";
+    }else{
+        echo "Erreur lors de l'envoi du mail";
+    }
 
-    echo "L'email a été envoyé.";
+    
     
     
 

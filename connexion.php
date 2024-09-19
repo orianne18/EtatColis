@@ -6,6 +6,7 @@
 
     $trackingNumber = $_ENV['TRACKING_NUMBER'];
     $apiKey=$_ENV['API_KEY'];
+
     //Adresse de l'api suivi de colis
     $url = "https://api.laposte.fr/suivi/v2/idships/$trackingNumber?lang=fr_FR";
 
