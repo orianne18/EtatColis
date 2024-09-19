@@ -9,9 +9,9 @@
     <?php
     include 'connexion.php';
    
-    $code = "";
-    $date = "";
-    $label = "";
+    $code = ""; //code du statut
+    $date = ""; 
+    $label = ""; //libelle du statut
 
     $file = fopen("suivi.csv", "w");
 

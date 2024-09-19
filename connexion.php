@@ -25,14 +25,10 @@
     if ($response === false) {
         // En cas d'erreur, afficher l'erreur cURL
         echo 'Erreur cURL : ' . curl_error($ch);
-    } /*else {
-        // Si la requête a réussi, afficher la réponse
-        echo 'Réponse de l\'API : ' . $response;
-    }
-*/
+    } 
     curl_close($ch);
 
     $data = json_decode($response,true);
-    //var_dump($response);
+  
 
 ?>
