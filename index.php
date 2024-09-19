@@ -8,24 +8,23 @@
 <body>
     <?php
     include 'connexion.php';
-    $shipment = json_encode($data["shipment"],JSON_PRETTY_PRINT);
-    echo '<pre>';
-    var_dump($data);
-    //var_dump ($data['shipment']['timeline']);
-    echo '</pre>';
-    foreach($data['shipment']['timeline'] as $key => $value){
-        "<p>Etat ".$key." : ".$value."</p>";
-    }
-    if(isset($response)) {
-        //echo 'test1 passé';
-        if(isset($data['shipment'])){
-            echo 'test2 passé';
-            //"<p>".$data['shipment']['status']['event']."</p>";
-            
+   
+    $code = "";
+    $date = "";
+    $label = "";
+
+    $file = fopen("suivi.csv", "w");
+
+    for($i = 0 ; $i<count($data["shipment"]["event"]) ; $i++){
+        $code = $data["shipment"]["event"][$i]["code"];
+        $date = $data["shipment"]["event"][$i]["date"];
+        $label = $data["shipment"]["event"][$i]["label"];
+       
+        fwrite($file,$code.','.$date.','.$label."\n");
         }
-        
-        //echo 
-    }
+    fclose($file);
+  
+    
     ?>
 </body>
 </html>
