@@ -11,22 +11,6 @@
     include 'mail.php';
     include 'fichier.php';
    
-    $code = ""; //code du statut
-    $date = ""; 
-    $label = ""; //libelle du statut
-
-
-    $file = fopen("suivi.csv", "w");
-
-    for($i = 0 ; $i<count($data["shipment"]["event"]) ; $i++){
-        $code = $data["shipment"]["event"][$i]["code"];
-        $date = $data["shipment"]["event"][$i]["date"];
-        $label = $data["shipment"]["event"][$i]["label"];
-       
-        fwrite($file,$code.','.$date.','.$label."\n");
-        }
-    fclose($file);
-  
     
     ?>
 </body>

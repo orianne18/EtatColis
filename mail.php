@@ -8,9 +8,9 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    require 'C:/PHPMailer/src/Exception.php';
-    require 'C:/PHPMailer/src/PHPMailer.php';
-    require 'C:/PHPMailer/src/SMTP.php';
+    require 'vendor/phpmailer/phpmailer/src/Exception.php';
+    require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+    require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
     
     $env = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -25,7 +25,7 @@
     $mail->Port = $_ENV["PORT"];
     $mail->Username = $_ENV["FROM"];
     $mail->Password = $_ENV["PASSWORD"];
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->SMTPSecure = $_ENV["MAIL_ENCRYPTION"];
 
     $from=$_ENV['FROM'];
     $to=$_ENV['TO'];
@@ -57,12 +57,4 @@
     }
 
     
-
-
-    
-
-    
-    
-    
-
 ?>
