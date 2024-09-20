@@ -1,39 +1,65 @@
 <?php
 
     require_once 'vendor/autoload.php';
+    include 'connexion.php';
+    include 'fichier.php';
+    
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
 
+    require 'C:/PHPMailer/src/Exception.php';
+    require 'C:/PHPMailer/src/PHPMailer.php';
+    require 'C:/PHPMailer/src/SMTP.php';
+
+    
     $env = Dotenv\Dotenv::createImmutable(__DIR__);
     $env->load();
 
-    include 'connexion.php';
-    include 'index.php';
+    try {
+        $mail = new PHPMailer (true);
+        $mail->isSMTP();
+    $mail->SMTPAuth = true;
 
-    echo 1;
-
-    ini_set('display_errors',1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    $mail->Host = $_ENV["HOST"];
+    $mail->Port = $_ENV["PORT"];
+    $mail->Username = $_ENV["FROM"];
+    $mail->Password = $_ENV["PASSWORD"];
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
     $from=$_ENV['FROM'];
     $to=$_ENV['TO'];
-
-
     $subject="Suivi de votre colis.";
+    $message="";
 
-    if($code === "DI1"){
+    if($code === "DI1"){ //code DI1 : colis distribué
         $message="Votre colis a été livré !";
         $mail->addAttachment('/images/happy.jpg');
         
     } else{
         $message="Le colis n°".$_ENV['TRACKING_NUMBER']." est toujours en cours de livraison.";
     }
-    $headers="De :".$from;
 
-    if(mail($to,$subject,$message,$headers)){
+
+    $mail->setFrom($from);
+    $mail->addAddress($to);
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body = $message;
+
+    if($mail->send()){
         echo "L'email a été envoyé.";
     }else{
         echo "Erreur lors de l'envoi du mail";
     }
+    } catch (Exception $e) {
+            echo "Mailer Error: ".$e->getMessage();
+    }
+
+    
+
+
+    
 
     
     
