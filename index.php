@@ -7,11 +7,17 @@
 </head>
 <body>
     <?php
+    
+    require_once 'vendor/autoload.php';  
+
+    $env = Dotenv\Dotenv::createImmutable(__DIR__);
+    $env->load();
+        
+    echo '<h1>Suivi du colis n°'.$_ENV["TRACKING_NUMBER"]."!</h1>";
+
     include 'connexion.php';
     include 'mail.php';
-    include 'fichier.php';
-   
-    
+
     ?>
 </body>
 </html>

@@ -18,5 +18,7 @@
         }
     fclose($file); //fermeture du fichier
 
+    echo "<p>Fichier csv généré!</p>";
+
     
 ?>
